@@ -1,10 +1,9 @@
 
 all: test clean run
 
-APP_NAME?="simpleapp"
+APP_NAME?="pyramidapp"
 CONTAINERS=$(sudo docker ps -a -q)
-
-
+PORT?=5000
 
 build: clean
 	docker compose --no-cache build $(APP_NAME)
@@ -14,19 +13,16 @@ run:
 	docker logs -f --since=15m -t $(APP_NAME)
 
 start: clean run
-	xdg-open 'http://localhost'
+	xdg-open 'http://localhost:$(PORT)'
 ###### CLEANING #######
 
 clean:
 	sudo docker ps -a
 	-docker-compose down --remove-orphans
 	-sudo docker kill $(CONTAINERS)
-	-sudo docker container prune -f
-
 
 deepclean: clean
-	-rm -rf tables
-	-echo "$(CONTAINERS)" && sudo docker rm $(CONTAINERS)
+	-sudo docker container prune -f
 	-sudo docker image prune -f
 	-sudo docker system prune -a -f --volumes
 

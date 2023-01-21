@@ -1,4 +1,4 @@
-# Simple App
+# Pyramid App
 
 ---
 
@@ -35,7 +35,7 @@
 - container status
   - `docker-compose ps -a`
 - run a command in the container
-  - `docker-compose exec -option simple_app <command>`
+  - `docker-compose exec -option pyramid_app <command>`
 - stop all running containers
   - `make clean`
 - remove all stopped containers
@@ -44,10 +44,10 @@
 ### Read Logs
 
 ```sh
-docker logs --since=15m -t simple_app
+docker logs --since=15m -t pyramid_app
 ```
 
-*follows as a background process*
+_follows as a background process_
 
 ```sh
 docker logs -f --since=15m -t <container> &`

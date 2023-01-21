@@ -1,11 +1,11 @@
 ##Framework libs
-Flask>=2.2
+pyramid>=2.0
 
 # Requests
 requests
 
 # Server
-gunicorn
+waitress
 
 ## Testing
 pytest
