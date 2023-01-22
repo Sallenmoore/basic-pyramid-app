@@ -1,19 +1,19 @@
 
-all: test clean run
+all: test clean run start
 
-APP_NAME?="pyramidapp"
+APP_NAME?=pyramidapp
 CONTAINERS=$(sudo docker ps -a -q)
 PORT?=5000
 
 build: clean
-	docker compose --no-cache build $(APP_NAME)
+	docker-compose --no-cache build $(APP_NAME)
 
 run: 
 	docker-compose up --build -d
-	docker logs -f --since=15m -t $(APP_NAME)
+	docker logs -t $(APP_NAME)
 
 start: clean run
-	xdg-open 'http://localhost:$(PORT)'
+	echo "starting app"
 ###### CLEANING #######
 
 clean:

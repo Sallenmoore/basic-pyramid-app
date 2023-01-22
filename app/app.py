@@ -1,16 +1,9 @@
 from pyramid.config import Configurator
-from pyramid.response import Response
-from waitress import serve
 
 
-def hello_world(request):
-    print("Incoming request")
-    return Response("<body><h1>Hello World!</h1></body>")
-
-
-if __name__ == "__main__":
-    with Configurator() as config:
-        config.add_route("hello", "/")
-        config.add_view(hello_world, route_name="hello")
-        app = config.make_wsgi_app()
-    serve(app, host="0.0.0.0", port=5000)
+def main(global_config, **settings):
+    config = Configurator(settings=settings)
+    config.add_route("home", "/")
+    config.add_route("hello", "/howdy")
+    config.scan(".views")
+    return config.make_wsgi_app()
